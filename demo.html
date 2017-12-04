@@ -1,0 +1,275 @@
+﻿<!doctype html>
+
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+
+    <meta charset="utf-8">
+    <title>文创汇升级提示</title>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            max-width: 100%;
+            margin: 0;
+            overflow: hidden;
+            font-family: "microsoft-yahei";
+        }
+
+        #space {
+            width: 100%
+        }
+
+        #warp {
+            position: absolute;
+            height: 635px;
+            z-index: 9;
+            overflow: auto;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            color: #fff;
+            padding: 10px;
+            width: 800px;
+            font-size: 14px;
+            line-height: 45px;
+        }
+
+        /*倒计时css*/
+
+        ul#countdown {
+            text-align: center;
+            margin: 2em 0 2em;
+
+        }
+
+        ul#countdown li {
+            display: inline-block;
+            margin-right: 28px;
+            width: 85px;
+            height: 85px;
+            text-align: center;
+            padding: 12px;
+            border: 1px solid #2be0f0;
+            border-radius: 70px;
+            -webkit-border-radius: 70px;
+            -moz-border-radius: 70px;
+        }
+
+        ul#countdown li span {
+            font-size: 45px;
+            color: #fff;
+            font-weight: 100;
+            padding-top: 10px;
+            display: block;
+        }
+
+        ul#countdown li p.timeRefDays,
+        ul#countdown li p.timeRefHours,
+        ul#countdown li p.timeRefMinutes,
+        ul#countdown li p.timeRefSeconds {
+            color: #2be0f0;
+            font-size: 17px;
+            font-weight: 100;
+            font-style: "microsoft-yahei";
+            line-height: 0px;
+            font-style: italic;
+        }
+    </style>
+
+    <link rel="shortcut icon" type="image/x-icon" href="https://www.p2pcq.com/res/favicon.ico">
+    <script type="text/javascript" src="https://www.p2pcq.com/res/js/base/jquery-1.8.3.min.js"></script>
+
+</head>
+
+<body>
+
+    <canvas id="space"></canvas>
+
+    <div id="warp">
+        <p style="font-size:28px;text-align: center;">网站升级通知</p>
+        <p style="font-size:18px;text-indent: 2rem;">
+            为了给您提供更加安全、快捷、优质的服务体验，文创汇将于<span style="font-size:20px;color: #ff6200">2017年6月21日22:00——6月22日6:00</span>进行系统升级维护，在此期间<span style="font-size:20px;color: #ff6200">官方网站、微信订阅号</span>等页面将无法正常访问。还请广大客户避开此时间段操作，并提前做好资金规划。
+        </p>
+        <p style="text-align: right;font-size:18px;padding-right:30px;">文创汇团队</p>
+        <p style="text-align: right;font-size:18px;padding-right:30px;">2017.12.20</p>
+        <p style="border-top:1px solid #2be0f0;font-size:25px;text-align: center;font-weight: 100;padding-top: 25px;">距离网站升级完成还有</p>
+        <!-- 加入倒计时 -->
+
+        <ul id="countdown">
+            <li>
+                <span class="days"></span>
+                <p class="timeRefDays">days</p>
+            </li>
+            <li>
+                <span class="hours"></span>
+                <p class="timeRefHours">hours</p>
+            </li>
+            <li>
+                <span class="minutes"></span>
+                <p class="timeRefMinutes">minutes</p>
+            </li>
+            <li>
+                <span class="seconds"></span>
+                <p class="timeRefSeconds">seconds</p>
+            </li>
+            <div class="clear"></div>
+        </ul>
+
+    </div>
+
+    <script>
+        window.requestAnimFrame = (function() {
+            return window.requestAnimationFrame
+        })();
+        var canvas = document.getElementById("space");
+        var c = canvas.getContext("2d");
+
+        var numStars = 1900;
+        var radius = '0.' + Math.floor(Math.random() * 9) + 1;
+        var focalLength = canvas.width * 2;
+        var warp = 0;
+        var centerX, centerY;
+
+        var stars = [],
+            star;
+        var i;
+
+        var animate = true;
+
+        initializeStars();
+
+        function executeFrame() {
+
+            if (animate)
+                requestAnimFrame(executeFrame);
+            moveStars();
+            drawStars();
+        }
+
+        function initializeStars() {
+            centerX = canvas.width / 2;
+            centerY = canvas.height / 2;
+
+            stars = [];
+            for (i = 0; i < numStars; i++) {
+                star = {
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    z: Math.random() * canvas.width,
+                    o: '0.' + Math.floor(Math.random() * 99) + 1
+                };
+                stars.push(star);
+            }
+        }
+
+        function moveStars() {
+            for (i = 0; i < numStars; i++) {
+                star = stars[i];
+                star.z--;
+
+                if (star.z <= 0) {
+                    star.z = canvas.width;
+                }
+            }
+        }
+
+        function drawStars() {
+            var pixelX, pixelY, pixelRadius;
+
+            // Resize to the screen
+            if (canvas.width != window.innerWidth || canvas.width != window.innerWidth) {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initializeStars();
+            }
+            if (warp == 0) {
+                c.fillStyle = "rgba(0,10,20,1)";
+                c.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            c.fillStyle = "rgba(251, 251, 251, " + radius + ")";
+            for (i = 0; i < numStars; i++) {
+                star = stars[i];
+
+                pixelX = (star.x - centerX) * (focalLength / star.z);
+                pixelX += centerX;
+                pixelY = (star.y - centerY) * (focalLength / star.z);
+                pixelY += centerY;
+                pixelRadius = 1 * (focalLength / star.z);
+
+                c.fillRect(pixelX, pixelY, pixelRadius, pixelRadius);
+                c.fillStyle = "rgba(251, 251, 251, " + star.o + ")";
+                //c.fill();
+            }
+        }
+
+        executeFrame();
+
+
+
+
+        // 增加倒计时提示
+
+        $(function() {
+
+            show_time();
+
+        });
+
+        function show_time() {
+            var time_start = new Date().getTime(); //获取现在的时间
+
+            var time_end = new Date("2017/12/05 15:51:00").getTime(); //设定未来时间
+
+            //计算时间差
+            var time_distance = time_end - time_start;
+            if (time_distance > 0) {
+                // 天时分秒换算
+                var int_day = Math.floor(time_distance / 86400000)
+                time_distance -= int_day * 86400000;
+
+                var int_hour = Math.floor(time_distance / 3600000)
+                time_distance -= int_hour * 3600000;
+
+                var int_minute = Math.floor(time_distance / 60000)
+                time_distance -= int_minute * 60000;
+
+                var int_second = Math.floor(time_distance / 1000)
+                // 时分秒为单数时、前面加零
+                if (int_day < 10) {
+                    int_day = "0" + int_day;
+                }
+                if (int_hour < 10) {
+                    int_hour = "0" + int_hour;
+                }
+                if (int_minute < 10) {
+                    int_minute = "0" + int_minute;
+                }
+                if (int_second < 10) {
+                    int_second = "0" + int_second;
+                }
+                // 显示时间
+                $(".days").html(int_day);
+                $(".hours").html(int_hour);
+                $(".minutes").html(int_minute);
+                $(".seconds").html(int_second);
+
+                setTimeout("show_time()", 1000);
+
+            } else {
+                $(".days").html('00');
+                $(".hours").html('00');
+                $(".minutes").html('00');
+                $(".seconds").html('00');
+
+            }
+        }
+    </script>
+
+</body>
+
+</html>
