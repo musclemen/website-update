@@ -128,7 +128,6 @@
         })();
         var canvas = document.getElementById("space");
         var c = canvas.getContext("2d");
-
         var numStars =2000; //星星总数量
         var radius = '0.' + Math.floor(Math.random() * 9) + 1; 
         var focalLength = canvas.width * 2;
@@ -181,16 +180,25 @@
         function drawStars() {
             var pixelX, pixelY, pixelRadius;
 
-            // Resize to the screen
+            // 适应屏幕 永远都是全屏
             if (canvas.width != window.innerWidth || canvas.width != window.innerWidth) {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 initializeStars();
             }
             if (warp == 0) {
-                c.fillStyle = "rgba(0,10,20,1)";
+                c.fillStyle = "rgba(0,10,20,1)"; //黑蓝色的夜空很美丽
                 c.fillRect(0, 0, canvas.width, canvas.height);
             }
+
+
+            //定义星星的颜色，从文创汇3原色中随机选一个
+
+            // var wch_color,star_color,stars_color; 
+            // wch_color = ["#ff6200","#5CBFE4","#5983B7"];
+            // star_color = Math.floor((Math.random()*wch_color.length)); 
+            // stars_colors = wch_color[star_color];
+
             c.fillStyle = "rgba(251, 251, 251, " + radius + ")";
             for (i = 0; i < numStars; i++) {
                 star = stars[i];
@@ -212,7 +220,7 @@
 
 
 
-        // 增加倒计时提示
+        // 增加完成升级倒计时提示
 
         $(function() {
 
