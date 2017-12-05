@@ -97,7 +97,7 @@
         </p>
         <p style="text-align: right;font-size:18px;padding-right:30px;">文创汇团队</p>
         <p style="text-align: right;font-size:18px;padding-right:30px;">2017.12.20</p>
-        <p style="border-top:1px solid #2be0f0;font-size:25px;text-align: center;font-weight: 100;padding-top: 25px;">距离网站升级完成还有</p>
+        <p style="border-top:1px solid #2be0f0;font-size:25px;text-align: center;font-weight: 100;padding-top: 25px;">升级完成倒计时</p>
         <!-- 加入倒计时 -->
 
         <ul id="countdown">
@@ -129,8 +129,8 @@
         var canvas = document.getElementById("space");
         var c = canvas.getContext("2d");
 
-        var numStars = 1900;
-        var radius = '0.' + Math.floor(Math.random() * 9) + 1;
+        var numStars =2000; //星星总数量
+        var radius = '0.' + Math.floor(Math.random() * 9) + 1; 
         var focalLength = canvas.width * 2;
         var warp = 0;
         var centerX, centerY;
@@ -141,7 +141,7 @@
 
         var animate = true;
 
-        initializeStars();
+        initializeStars();//初始化单颗星星
 
         function executeFrame() {
 
