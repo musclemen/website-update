@@ -9,80 +9,106 @@
     <title>文创汇升级提示</title>
 
     <style>
-        html,
-        body {
-            height: 100%;
-            max-width: 100%;
-            margin: 0;
-            overflow: hidden;
-            font-family: "microsoft-yahei";
-        }
+    html,
+    body {
+        height: 100%;
+        max-width: 100%;
+        margin: 0;
+        overflow: hidden;
+        font-family: "microsoft-yahei";
+    }
 
-        #space {
-            width: 100%
-        }
+    #space {
+        width: 100%
+    }
 
-        #warp {
-            position: absolute;
-            height: 635px;
-            z-index: 9;
-            overflow: auto;
-            margin: auto;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            color: #fff;
-            padding: 10px;
-            width: 800px;
-            font-size: 14px;
-            line-height: 45px;
-        }
+    #warp {
+        position: absolute;
+        height: 635px;
+        z-index: 9;
+        overflow: auto;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        color: #fff;
+        padding: 10px;
+        width: 800px;
+        font-size: 14px;
+        line-height: 45px;
+    }
 
-        /*倒计时css*/
+    /*倒计时css*/
 
-        ul#countdown {
-            text-align: center;
-            margin: 2em 0 2em;
+    ul#countdown {
+        text-align: center;
+        margin: 2em 0 2em;
 
-        }
+    }
 
-        ul#countdown li {
-            display: inline-block;
-            margin-right: 28px;
-            width: 85px;
-            height: 85px;
-            text-align: center;
-            padding: 12px;
-            border: 1px solid #2be0f0;
-            border-radius: 70px;
-            -webkit-border-radius: 70px;
-            -moz-border-radius: 70px;
-        }
+    ul#countdown li {
+        display: inline-block;
+        margin-right: 28px;
+        width: 85px;
+        height: 85px;
+        text-align: center;
+        padding: 12px;
+        border: 1px solid #2be0f0;
+        border-radius:50%;
+        -webkit-border-radius:50%;
+        -moz-border-radius:50%;
+        position: relative;
+    }
 
-        ul#countdown li span {
-            font-size: 45px;
-            color: #fff;
-            font-weight: 100;
-            padding-top: 10px;
-            display: block;
-        }
+    ul#countdown li span{
+        font-size: 45px;
+        color: #fff;
+        font-weight: 100;
+        padding-top: 10px;
+        display: block;
+    }
 
-        ul#countdown li p.timeRefDays,
-        ul#countdown li p.timeRefHours,
-        ul#countdown li p.timeRefMinutes,
-        ul#countdown li p.timeRefSeconds {
-            color: #2be0f0;
-            font-size: 17px;
-            font-weight: 100;
-            font-style: "microsoft-yahei";
-            line-height: 0px;
-            font-style: italic;
-        }
-    </style>
+    ul#countdown li p.timeRefDays,
+    ul#countdown li p.timeRefHours,
+    ul#countdown li p.timeRefMinutes,
+    ul#countdown li p.timeRefSeconds {
+        color: #2be0f0;
+        font-size: 17px;
+        font-weight: 100;
+        font-style: "microsoft-yahei";
+        line-height: 0px;
+        font-style: italic;
+    }
 
-    <link rel="shortcut icon" type="image/x-icon" href="https://www.p2pcq.com/res/favicon.ico">
-    <script type="text/javascript" src="https://www.p2pcq.com/res/js/base/jquery-1.8.3.min.js"></script>
+    /*倒计时加上圆圈*/
+
+    ul#countdown li i{  
+
+        width: 85px;
+        height: 85px;  
+        position: absolute;  
+        display: block;
+        /*旋转动画*/  
+        animation:circleRoate 5s infinite linear ;   
+        
+    }  
+    .dotdot{  
+        position: absolute;  
+        left:-2px;  
+        width: 10px;  
+        height: 10px;  
+        border-radius: 50%;  
+        background:#ff6200;  
+    }  
+    @keyframes circleRoate{  
+        from{transform: rotate(0deg);}  
+        to{transform: rotate(360deg);}  
+    }  
+</style>
+
+<link rel="shortcut icon" type="image/x-icon" href="https://www.p2pcq.com/res/favicon.ico">
+<script type="text/javascript" src="https://www.p2pcq.com/res/js/base/jquery-1.8.3.min.js"></script>
 
 </head>
 
@@ -114,6 +140,7 @@
                 <p class="timeRefMinutes">minutes</p>
             </li>
             <li>
+                <i><b class="dotdot"></b></i>
                 <span class="seconds"></span>
                 <p class="timeRefSeconds">seconds</p>
             </li>
@@ -135,7 +162,7 @@
         var centerX, centerY;
 
         var stars = [],
-            star;
+        star;
         var i;
 
         var animate = true;
